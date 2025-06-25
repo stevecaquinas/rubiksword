@@ -125,7 +125,8 @@
 <body>
   <h1>RubiksWord!</h1>
   <p>The grid below contains five 5-letter words horizontally.</p>
-  <p>Use the arrows to rotate rows and columns!</p>
+  <p>Use the arrows to rotate rows and columns!<br>
+  <strong>Puzzle is solved when every row is a valid word. Columns do not need to be words.</strong></p>
   <div class="center-container">
     <div class="game-container" id="game"></div>
     <p id="moves">Moves: 0</p>
@@ -327,8 +328,16 @@
     }
 
     function checkWin() {
-      const won = grid.every((row, i) => row.join("") === originalGrid[i].join(""));
-      if (won) {
+      // Win if every row forms a valid word (columns don't matter)
+      let allRowsAreWords = true;
+      for (let i = 0; i < 5; i++) {
+        const rowWord = grid[i].join("");
+        if (!words.includes(rowWord)) {
+          allRowsAreWords = false;
+          break;
+        }
+      }
+      if (allRowsAreWords) {
         let feedback = "";
         if (moves < 100)
           feedback = "You are a GENIUS!";
