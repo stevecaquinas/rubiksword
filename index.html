@@ -176,7 +176,51 @@
     // Track original row for each tile (color origin)
     let originRows = Array.from({length: 5}, (_, r) => Array(5).fill(r));
 
-    // SCRAMBLE FUNCTION (scramble grid and originRows in parallel)
+    // SCRAMBLE ROTATIONS (do NOT increment moves)
+    function rotateRowRightScramble(row) {
+      const last = grid[row][4];
+      const lastOrigin = originRows[row][4];
+      for (let i = 4; i > 0; i--) {
+        grid[row][i] = grid[row][i - 1];
+        originRows[row][i] = originRows[row][i - 1];
+      }
+      grid[row][0] = last;
+      originRows[row][0] = lastOrigin;
+    }
+
+    function rotateRowLeftScramble(row) {
+      const first = grid[row][0];
+      const firstOrigin = originRows[row][0];
+      for (let i = 0; i < 4; i++) {
+        grid[row][i] = grid[row][i + 1];
+        originRows[row][i] = originRows[row][i + 1];
+      }
+      grid[row][4] = first;
+      originRows[row][4] = firstOrigin;
+    }
+
+    function rotateColDownScramble(col) {
+      const last = grid[4][col];
+      const lastOrigin = originRows[4][col];
+      for (let i = 4; i > 0; i--) {
+        grid[i][col] = grid[i - 1][col];
+        originRows[i][col] = originRows[i - 1][col];
+      }
+      grid[0][col] = last;
+      originRows[0][col] = lastOrigin;
+    }
+
+    function rotateColUpScramble(col) {
+      const first = grid[0][col];
+      const firstOrigin = originRows[0][col];
+      for (let i = 0; i < 4; i++) {
+        grid[i][col] = grid[i + 1][col];
+        originRows[i][col] = originRows[i + 1][col];
+      }
+      grid[4][col] = first;
+      originRows[4][col] = firstOrigin;
+    }
+
     function scramble() {
       selectedWords = pickRandomWords(words, 5);
       originalGrid = selectedWords.map(w => w.split(""));
@@ -186,22 +230,22 @@
         const r = Math.floor(Math.random() * 5);
         const c = Math.floor(Math.random() * 5);
         if (Math.random() > 0.5) {
-          rotateRowRight(r, true);
+          rotateRowRightScramble(r);
         } else {
-          rotateRowLeft(r, true);
+          rotateRowLeftScramble(r);
         }
         if (Math.random() > 0.5) {
-          rotateColDown(c, true);
+          rotateColDownScramble(c);
         } else {
-          rotateColUp(c, true);
+          rotateColUpScramble(c);
         }
       }
       moves = 0;
       update();
     }
 
-    // ROTATION FUNCTIONS (move grid and originRows in parallel)
-    function rotateRowRight(row, isScramble) {
+    // USER ROTATIONS (always increment moves)
+    function rotateRowRight(row) {
       const last = grid[row][4];
       const lastOrigin = originRows[row][4];
       for (let i = 4; i > 0; i--) {
@@ -210,10 +254,10 @@
       }
       grid[row][0] = last;
       originRows[row][0] = lastOrigin;
-      if (!isScramble) moves++;
+      moves++;
     }
 
-    function rotateRowLeft(row, isScramble) {
+    function rotateRowLeft(row) {
       const first = grid[row][0];
       const firstOrigin = originRows[row][0];
       for (let i = 0; i < 4; i++) {
@@ -222,10 +266,10 @@
       }
       grid[row][4] = first;
       originRows[row][4] = firstOrigin;
-      if (!isScramble) moves++;
+      moves++;
     }
 
-    function rotateColDown(col, isScramble) {
+    function rotateColDown(col) {
       const last = grid[4][col];
       const lastOrigin = originRows[4][col];
       for (let i = 4; i > 0; i--) {
@@ -234,10 +278,10 @@
       }
       grid[0][col] = last;
       originRows[0][col] = lastOrigin;
-      if (!isScramble) moves++;
+      moves++;
     }
 
-    function rotateColUp(col, isScramble) {
+    function rotateColUp(col) {
       const first = grid[0][col];
       const firstOrigin = originRows[0][col];
       for (let i = 0; i < 4; i++) {
@@ -246,7 +290,7 @@
       }
       grid[4][col] = first;
       originRows[4][col] = firstOrigin;
-      if (!isScramble) moves++;
+      moves++;
     }
 
     // ANIMATION WRAPPERS
@@ -256,7 +300,11 @@
         cell.classList.add(direction === "right" ? "slide-right" : "slide-left");
       });
       setTimeout(() => {
-        direction === "right" ? rotateRowRight(row) : rotateRowLeft(row);
+        if (direction === "right") {
+          rotateRowRight(row);
+        } else {
+          rotateRowLeft(row);
+        }
         update();
       }, 300);
     }
@@ -266,7 +314,11 @@
         cell.classList.add(direction === "down" ? "slide-down" : "slide-up");
       });
       setTimeout(() => {
-        direction === "down" ? rotateColDown(col) : rotateColUp(col);
+        if (direction === "down") {
+          rotateColDown(col);
+        } else {
+          rotateColUp(col);
+        }
         update();
       }, 300);
     }
