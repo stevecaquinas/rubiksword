@@ -50,7 +50,8 @@
   }
 
   .cell.correct {
-    background-color: green;
+    background-color: green !important;
+    color: white !important;
   }
 
   .btn {
@@ -58,6 +59,8 @@
     color: white;
     border: none;
     cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
   }
 
   .empty {
@@ -76,8 +79,6 @@
     font-size: 1.5em;
     min-width: 180px;
   }
-
-
 
   /* Animation classes */
   .slide-right { animation: slideRight 0.3s; }
@@ -117,7 +118,6 @@
       max-width: none;
       max-height: none;
     }
-
     .cell, .btn {
       width: 60px;
       height: 60px;
@@ -138,32 +138,34 @@
   </div>
 
   <script>
-        const words = ["ABACK","ABASE","ABATE","ABBEY","ABBOT","ABETS","ABHOR","ABIDE","ABODE","ABORT","ABOUT","ABOVE","ABUSE","ABYSS","ACHED","ACING","ACORN","ACRID","ACTED","ACTOR","ACUTE","ADAGE","ADAPT","ADDED","ADDER","ADDLE","ADEPT","ADIEU","ADIOS","ADMIN","ADMIT","ADOBE","ADOPT","ADORE","ADORN","ADULT","AEGIS","AFFIX","AFIRE","AFOOT","AFORE","AFTER","AGAIN","AGAPE","AGATE","AGAVE","AGENT","AGGRO","AGILE","AGING","AGLOW","AGONY","AGORA","AGREE","AHEAD","AIDED","AIDER","AILED","AIMED","AIMER","AIRED","AISLE","ALARM","ALBUM","ALDER","ALERT","ALGAE","ALGAL","ALIAS","ALIBI","ALIEN","ALIGN","ALIKE","ALIVE","ALLAY","ALLEY","ALLOT","ALLOW","ALLOY","ALOFT","ALOHA","ALONE","ALONG","ALOOF","ALOUD","ALPHA","ALTAR","ALTER","AMASS","AMAZE","AMBER","AMBIT","AMBLE","AMEND","AMINE","AMINO","AMISS","AMITY","AMONG","AMOUR","AMPED","AMPLE","AMPLY","AMUSE","ANGEL","ANGER","ANGLE","ANGRY","ANGST","ANIMA","ANIME","ANISE","ANKLE","ANNEX","ANNOY","ANNUL","ANODE","ANTIC","ANTSY","ANVIL","AORTA","APACE","APART","APHID","APNEA","APPLE","APPLY","APRON","APTLY","ARBOR","ARDOR","ARENA","ARGON","ARGOT","ARGUE","ARISE","ARMED","ARMOR","AROMA","AROSE","ARRAY","ARROW","ARSON","ARTSY","ASCOT","ASHEN","ASIDE","ASKED","ASKER","ASKEW","ASPEN","ASPIC","ASSAY","ASSET","ASTIR","ATLAS","ATOLL","ATONE","ATTIC","AUDIO","AUDIT","AUGHT","AUGUR","AUNTY","AURAL","AVAIL","AVERT","AVIAN","AVOID","AWAIT","AWAKE","AWARD","AWARE","AWASH","AWFUL","AWOKE","AXIAL","AXING","AXIOM","AXION","AZURE",
-                       "BABEL","BACON","BADDY","BADGE","BADLY","BAGEL","BAGGY","BAIRN","BAIZE","BAKED","BAKER","BALDY","BALED","BALER","BALMY","BALSA","BANAL","BANDY","BANJO","BARED","BARER","BARGE","BARMY","BARON","BASED","BASIC","BASIL","BASIN","BASIS","BASSO","BASSY","BASTE","BATCH","BATED","BATHE","BATON","BATTY","BAWDY","BAYED","BAYOU","BEACH","BEADY","BEAMY","BEARD","BEAST","BEAUT","BEECH","BEEFY","BEERY","BEFIT","BEGAN","BEGET","BEGIN","BEGUN","BEIGE","BEING","BELAY","BELCH","BELIE","BELLE","BELLY","BELOW","BENCH","BENDY","BERET","BERRY","BERTH","BERYL","BESET","BETEL","BETTA","BEVEL","BEZEL","BHAJI","BIBLE","BICEP","BIDDY","BIDED","BIDET","BIGHT","BIGOT","BIJOU","BIKED","BIKER","BILGE","BILLY","BIMBO","BINGE","BINGO","BIOME","BIOTA","BIPOD","BIRCH","BIRTH","BISON","BITCH","BITER","BLACK","BLADE","BLAME","BLAND","BLANK","BLARE","BLASE","BLAST","BLAZE","BLEAK","BLEAT","BLEED","BLEEP","BLEND","BLESS","BLIMP","BLIND","BLING","BLINK","BLISS","BLITZ","BLOAT","BLOCK","BLOKE","BLOND","BLOOD","BLOOM","BLOWN","BLUED","BLUES","BLUEY","BLUFF","BLUNT","BLURB","BLURT","BLUSH","BOARD","BOAST","BOBBY","BOCHE","BODED","BOGEY","BOGGY","BOGUS","BONED","BONEY","BONGO","BONNY","BONUS","BOOBY","BOOED","BOOMY","BOOST","BOOTH","BOOTY","BOOZE","BOOZY","BORAX","BORED","BORER","BORNE","BORON","BOSOM","BOSON","BOSSY","BOSUN","BOTCH","BOUGH","BOULE","BOUND","BOWED","BOWEL","BOWER","BOXED","BOXER","BRACE","BRACT","BRAID","BRAIN","BRAKE","BRAND","BRASH","BRASS","BRAVE","BRAVO","BRAWL","BRAWN","BREAD","BREAK","BREAM","BREED","BRIAR","BRIBE","BRICK","BRIDE","BRIEF","BRIER","BRINE","BRING","BRINK","BRINY","BRISK","BROAD","BROIL","BROKE","BROOD","BROOK","BROOM","BROTH","BROWN","BRUNT","BRUSH","BRUTE","BUDDY","BUDGE","BUGGY","BUGLE","BUILD","BUILT","BULGE","BULKY","BULLY","BUMPY","BUNCH","BUNNY","BURKA","BURLY","BURNT","BURST","BUSED","BUSHY","BUSTY","BUTCH","BUTTE","BUXOM","BUYER","BUZZY","BYLAW","BYWAY",
-                       "CABAL","CABBY","CABER","CABIN","CABLE","CACHE","CACTI","CADDY","CADET","CADRE","CAGED","CAGEY","CAIRN","CAKED","CALVE","CAMEL","CAMEO","CANAL","CANDY","CANED","CANNY","CANOE","CANON","CANTO","CAPED","CAPER","CAPON","CARAT","CARED","CARER","CARGO","CAROB","CAROL","CAROM","CARRY","CARVE","CASED","CASTE","CATCH","CATER","CATTY","CAULK","CAUSE","CAVED","CAVER","CAVIL","CEASE","CEDAR","CEDED","CELLO","CHAFE","CHAFF","CHAIN","CHAIR","CHALK","CHAMP","CHANT","CHAOS","CHARD","CHARM","CHART","CHASE","CHASM","CHEAP","CHEAT","CHECK","CHEEK","CHEEP","CHEER","CHESS","CHEST","CHEWY","CHICK","CHIDE","CHIEF","CHILD","CHILI","CHILL","CHIME","CHIMP","CHINA","CHIRP","CHIVE","CHOCK","CHOIR","CHOKE","CHOMP","CHORD","CHORE","CHOSE","CHUCK","CHUFF","CHUMP","CHUNK","CHURN","CHUTE","CIDER","CIGAR","CINCH","CIRCA","CITED","CIVIC","CIVIL","CLAIM","CLAMP","CLANG","CLANK","CLASH","CLASP","CLASS","CLEAN","CLEAR","CLEFT","CLERK","CLICK","CLIFF","CLIMB","CLING","CLINK","CLOAK","CLOCK","CLOMP","CLONE","CLOSE","CLOTH","CLOUD","CLOUT","CLOVE","CLOWN","CLUCK","CLUED","CLUMP","CLUNG","CLUNK","COACH","COAST","COBRA","COCKY","COCOA","CODEC","CODED","CODER","CODEX","COLIC","COLIN","COLON","COLOR","COMBO","COMET","COMFY","COMIC","COMMA","CONCH","CONDO","CONED","CONGA","CONGO","CONIC","COOED","COOPT","COPED","COPSE","CORAL","CORED","CORER","CORGI","CORNY","COUCH","COUGH","COULD","COUNT","COUPE","COURT","COVEN","COVER","COVET","COWED","COWER","COYLY","CRACK","CRAFT","CRAMP","CRANE","CRANK","CRAPE","CRASH","CRASS","CRATE","CRAVE","CRAWL","CRAZE","CRAZY","CREAK","CREAM","CREDO","CREED","CREEK","CREEP","CREME","CREPE","CREPT","CRESS","CREST","CRIED","CRIER","CRIME","CRIMP","CRISP","CROAK","CROCK","CROFT","CRONE","CRONY","CROOK","CROON","CROSS","CROWD","CROWN","CRUDE","CRUEL","CRUET","CRUMB","CRUSH","CRUST","CRYPT","CUBBY","CUBED","CUBIC","CUBIT","CUMIN","CUPID","CUPPA","CURED","CURIA","CURIO","CURLY","CURRY","CURSE","CURVE","CURVY","CUSHY","CUTER","CUTIE","CYCLE","CYNIC",
-                       "DACHA","DADDY","DAFFY","DAILY","DAIRY","DAISY","DANCE","DANDY","DARED","DATED","DATER","DATUM","DAUNT","DAZED","DEALT","DEATH","DEBIT","DEBUG","DEBUT","DECAF","DECAL","DECAY","DECOR","DECOY","DECRY","DEFER","DEIFY","DEIGN","DEITY","DELAY","DELTA","DELVE","DEMON","DEMUR","DENIM","DENSE","DEPOT","DEPTH","DERBY","DETER","DETOX","DEUCE","DEVIL","DIARY","DICED","DICEY","DICKY","DIGIT","DILLY","DIMLY","DINED","DINER","DINGO","DINGY","DINKY","DIODE","DIPPY","DIRGE","DIRTY","DISCO","DISHY","DITCH","DITTO","DITTY","DIVAN","DIVED","DIVER","DIVOT","DIVVY","DIZZY","DODGE","DODGY","DOGGY","DOGMA","DOING","DOLED","DOLLY","DOMED","DONOR","DONUT","DOOZY","DOPED","DOPEY","DOSED","DOTED","DOTTY","DOUBT","DOUGH","DOUSE","DOWDY","DOWEL","DOWER","DOWNY","DOWRY","DOWSE","DOYEN","DOZED","DOZEN","DOZER","DRAFT","DRAIN","DRAKE","DRAMA","DRANK","DRAPE","DRAWL","DRAWN","DREAD","DREAM","DRESS","DRIED","DRIER","DRIFT","DRILL","DRILY","DRINK","DRIVE","DROID","DROLL","DRONE","DROOL","DROOP","DROSS","DROVE","DROWN","DRUID","DRUNK","DRYAD","DRYER","DRYLY","DUCAL","DUCAT","DUCHY","DUCKY","DULLY","DUMMY","DUMPY","DUNCE","DUPED","DUSKY","DUSTY","DUTCH","DUVET","DWARF","DWEEB","DWELL","DWELT","DYING",
-                       "EAGER","EAGLE","EARED","EARLY","EARTH","EASED","EASEL","EASER","EATEN","EATER","EBBED","EBONY","EBOOK","ECLAT","EDEMA","EDGED","EDGER","EDICT","EDIFY","EERIE","EGGED","EGRET","EIDER","EIGHT","EJECT","ELBOW","ELDER","ELECT","ELEGY","ELIDE","ELITE","ELOPE","ELUDE","ELVEN","EMAIL","EMBED","EMBER","EMCEE","EMERY","EMOTE","EMPTY","ENACT","ENDED","ENDOW","ENEMA","ENEMY","ENJOY","ENNUI","ENROL","ENSUE","ENTER","ENTRY","ENVOY","EPOCH","EPOXY","EQUAL","EQUIP","ERASE","ERECT","ERODE","ERRED","ERROR","ERUPT","ESSAY","ETHER","ETHIC","ETHOS","ETHYL","ETUDE","EVADE","EVENT","EVERY","EVICT","EVOKE","EXACT","EXALT","EXCEL","EXERT","EXILE","EXIST","EXPAT","EXPEL","EXTOL","EXTRA","EXUDE","EXULT","EXURB","EYING","EYRIE",
-                       "FABLE","FACED","FACER","FACET","FACIA","FADED","FADER","FAERY","FAINT","FAIRY","FAITH","FAKED","FAKER","FAMED","FANCY","FARCE","FARED","FATAL","FATED","FATTY","FAULT","FAUNA","FAVOR","FAXED","FAZED","FEAST","FEIGN","FEINT","FELON","FEMME","FEMUR","FENCE","FERAL","FERNY","FERRY","FETCH","FETED","FETID","FETUS","FEVER","FEWER","FIBER","FIBRE","FICHE","FICUS","FIELD","FIEND","FIERY","FIFTH","FIFTY","FIGHT","FILCH","FILED","FILER","FILET","FILLY","FILMY","FILTH","FINAL","FINCA","FINCH","FINED","FINER","FIORD","FIRED","FIRST","FISHY","FITLY","FIVER","FIXED","FIXER","FIZZY","FJORD","FLACK","FLAIL","FLAIR","FLAKE","FLAKY","FLAME","FLANK","FLARE","FLASH","FLASK","FLECK","FLEET","FLESH","FLICK","FLIER","FLING","FLOAT","FLOOD","FLOOR","FLOUR","FLOWN","FLUID","FLYER","FOCAL","FOCUS","FORCE","FORTH","FORTY","FORUM","FOUND","FRAME","FRAUD","FRESH","FRIED","FRONT","FROST","FRUIT","FULLY","FUNNY",
-                       "GAMMA","GAUGE","GENRE","GHOST","GIANT","GIVEN","GLAND","GLASS","GLOBE","GLORY","GLOSS","GLOVE","GLUED","GOING","GRACE","GRADE","GRAIN","GRAND","GRANT","GRAPE","GRAPH","GRASP","GRASS","GRAVE","GREAT","GREEK","GREEN","GREET","GRIEF","GRILL","GRIND","GROSS","GROUP","GROVE","GROWN","GUARD","GUESS","GUEST","GUIDE","GUILD","GUILT",
-                       "HABIT","HANDY","HAPPY","HARSH","HATED","HAVEN","HEARD","HEART","HEAVY","HEDGE","HELLO","HENCE","HIRED","HOBBY","HOLLY","HONEY","HONOR","HOPED","HORSE","HOTEL","HOUSE","HOVER","HUMAN","HUMOR",
-                       "IDEAL","IDIOT","IMAGE","IMPLY","INBOX","INCUR","INDEX","INDIE","INNER","INPUT","INTRO","ISSUE",
-                       "JELLY","JEWEL","JOINT","JUDGE","JUICE","JUICY",
-                       "KNIFE","KNOCK","KNOWN",
-                       "LABEL","LABOR","LARGE","LASER","LATER","LAUGH","LAYER","LEARN","LEASE","LEAST","LEAVE","LEGAL","LEMON","LEVEL","LEVER","LIGHT","LIKED","LIMIT","LINED","LINEN","LINER","LIVED","LIVER","LOBBY","LOCAL","LODGE","LOGIC","LOOSE","LOVED","LOVER","LOWER","LOYAL","LUCKY","LUNAR","LUNCH","LYING",
-                       "MACRO","MAGIC","MAJOR","MAKER","MAPLE","MARCH","MARRY","MATCH","MATTE","MAYBE","MAYOR","MEANT","MEDAL","MEDIA","MELEE","MERCY","MERGE","MERIT","MERRY","MESSY","METAL","METER","METRO","MICRO","MIDST","MIGHT","MILES","MINOR","MINUS","MIXED","MIXER","MODEL","MODEM","MOIST","MONEY","MONTH","MORAL","MOTOR","MOUNT","MOUSE","MOUTH","MOVED","MOVIE","MUSIC",
-                       "NAKED","NAMED","NASAL","NASTY","NAVAL","NERVE","NEVER","NEWER","NEWLY","NEXUS","NICER","NICHE","NIGHT","NINJA","NINTH","NOBLE","NOISE","NOISY","NORTH","NOTCH","NOTED","NOVEL","NURSE","NYLON",
-                       "OASIS","OCCUR","OCEAN","OFFER","OFTEN","OLDER","OLIVE","OMEGA","ONION","ONSET","OPERA","OPTED","OPTIC","ORBIT","ORDER","ORGAN","OTHER","OUGHT","OUNCE","OUTER","OWNED","OWNER","OXIDE",
-                       "PAINT","PANEL","PANIC","PAPER","PARTY","PASTA","PASTE","PATCH","PATIO","PAUSE","PEACE","PEACH","PEARL","PEDAL","PENNY","PETTY","PHASE","PHONE","PHOTO","PIANO","PIECE","PILOT","PINCH","PITCH","PIXEL","PIZZA","PLACE","PLAIN","PLANE","PLANT","PLATE","PLAZA","POINT","POKER","POLAR","PORCH","POSED","POUCH","POUND","POWER","PRESS","PRICE","PRIDE","PRIME","PRINT","PRIOR","PRIZE","PROBE","PROMO","PRONE","PROOF","PROUD","PROVE","PROXY","PSALM","PULSE","PUNCH","PUPIL","PUPPY","PURSE",
-                       "QUEEN","QUERY","QUEST","QUEUE","QUICK","QUIET","QUILT","QUITE","QUOTE",
-                       "RADAR","RADIO","RAINY","RAISE","RALLY","RANCH","RANGE","RAPID","RATED","RATIO","RAZOR","REACH","REACT","READY","REALM","REBEL","REFER","REIGN","RELAX","RELAY","RENAL","RENEW","REPLY","RESET","RESIN","RETRO","RIDER","RIDGE","RIFLE","RIGHT","RIGID","RINSE","RISEN","RISKY","RIVAL","RIVER","ROBOT","ROCKY","ROGUE","ROMAN","ROUGH","ROUND","ROUTE","ROYAL","RUGBY","RULED","RULER","RURAL",
-                       "SADLY","SAFER","SALAD","SALON","SANDY","SATIN","SAUCE","SAVED","SCALE","SCALP","SCARE","SCARF","SCARY","SCENE","SCENT","SCOOP","SCOPE","SCORE","SCOUT","SCRAP","SCREW","SENSE","SERUM","SERVE","SETUP","SEVEN","SEWER","SHADE","SHAFT","SHAKE","SHALL","SHAME","SHAPE","SHARE","SHARK","SHARP","SHEEP","SHEER","SHEET","SHELF","SHELL","SHIFT","SHINE","SHINY","SHIRT","SHOCK","SHOOK","SHOOT","SHORE","SHORT","SHOWN","SIEGE","SIGHT","SIGMA","SILLY","SINCE","SIXTH","SIZED","SKILL","SKIRT","SKULL","SLATE","SLAVE","SLEEK","SLEEP","SLEPT","SLICE","SLIDE","SLOPE","SMALL","SMART","SMELL","SMILE","SMOKE","SNACK","SNAKE","SNEAK","SOLAR","SOLID","SOLVE","SONIC","SORRY","SOUND","SOUTH","SPACE","SPARE","SPARK","SPEAK","SPEED","SPELL","SPEND","SPENT","SPERM","SPICE","SPICY","SPIKE","SPINE","SPITE","SPLIT","SPOKE","SPOON","SPORT","SPRAY","SQUAD","STACK","STAFF","STAGE","STAIN","STAKE","STAMP","STAND","STARK","START","STATE","STEAK","STEAL","STEAM","STEEL","STEEP","STEER","STICK","STIFF","STILL","STOCK","STOLE","STONE","STOOD","STOOL","STORE","STORM","STORY","STOVE","STRAP","STRAW","STRIP","STUCK","STUDY","STUFF","STYLE","SUGAR","SUITE","SUNNY","SUPER","SURGE","SUSHI","SWEAR","SWEAT","SWEET","SWEPT","SWIFT","SWING","SWISS","SWORD","SYRUP",
-                       "TABLE","TAKEN","TASTE","TASTY","TEACH","TEETH","TEMPO","TENTH","THANK","THEFT","THEIR","THEME","THERE","THESE","THICK","THIEF","THIGH","THING","THINK","THIRD","THOSE","THREE","THREW","THROW","THUMB","TIGER","TIGHT","TIMER","TIRED","TITLE","TOAST","TODAY","TOKEN","TOOTH","TOPIC","TORCH","TOTAL","TOUCH","TOUGH","TOWEL","TOWER","TOXIC","TRACE","TRACK","TRACT","TRADE","TRAIL","TRAIN","TRAIT","TRASH","TREAT","TREND","TRIAL","TRIBE","TRICK","TRIED","TROUT","TRUCK","TRULY","TRUMP","TRUNK","TRUST","TRUTH","TUMOR","TUNED","TURBO","TUTOR","TWEET","TWICE","TWIST",
-                       "ULTRA","UNCLE","UNDER","UNION","UNITE","UNITY","UNTIL","UPPER","UPSET","URBAN","URGED","URINE","USAGE","USING","USUAL",
-                       "VAGUE","VALID","VALUE","VALVE","VAPOR","VAULT","VEGAN","VENUE","VERSE","VIDEO","VILLA","VINYL","VIRAL","VIRUS","VISIT","VITAL","VIVID","VOCAL","VODKA","VOICE","VOTED","VOTER",
-                       "WAGON","WAIST","WASTE","WATCH","WATER","WEIGH","WEIRD","WELSH","WHALE","WHEAT","WHEEL","WHERE","WHICH","WHILE","WHITE","WHOLE","WHOSE","WIDER","WIDOW","WIDTH","WIPED","WIRED","WITCH","WOMAN","WOMEN","WORLD","WORRY","WORSE","WORST","WORTH","WOULD","WOUND","WRATH","WRIST","WRITE","WRONG","WROTE",
-                       "YACHT","YEAST","YIELD","YOUNG","YOUTH","YUMMY",
-                       
-];
+    const words = ["ABACK","ABASE","ABATE","ABBEY","ABBOT","ABETS","ABHOR","ABIDE","ABODE","ABORT","ABOUT","ABOVE","ABUSE","ABYSS","ACHED","ACING","ACORN","ACRID","ACTED","ACTOR","ACUTE","ADAGE",
+                   "BABEL","BACON","BADDY","BADGE","BADLY","BAGEL","BAGGY","BAIRN","BAIZE","BAKED","BAKER","BALDY","BALED","BALER","BALMY","BALSA","BANAL","BANDY","BANJO","BARED","BARER","BARGE",
+                   "CABAL","CABBY","CABER","CABIN","CABLE","CACHE","CACTI","CADDY","CADET","CADRE","CAGED","CAGEY","CAIRN","CAKED","CALVE","CAMEL","CAMEO","CANAL","CANDY","CANED","CANNY","CANOE",
+                   "DACHA","DADDY","DAFFY","DAILY","DAIRY","DAISY","DANCE","DANDY","DARED","DATED","DATER","DATUM","DAUNT","DAZED","DEALT","DEATH","DEBIT","DEBUG","DEBUT","DECAF","DECAL","DECAY",
+                   "EAGER","EAGLE","EARED","EARLY","EARTH","EASED","EASEL","EASER","EATEN","EATER","EBBED","EBONY","EBOOK","ECLAT","EDEMA","EDGED","EDGER","EDICT","EDIFY","EERIE","EGGED","EGRET",
+                   "FABLE","FACED","FACER","FACET","FACIA","FADED","FADER","FAERY","FAINT","FAIRY","FAITH","FAKED","FAKER","FAMED","FANCY","FARCE","FARED","FATAL","FATED","FATTY","FAULT","FAUNA",
+                   "GAMMA","GAUGE","GENRE","GHOST","GIANT","GIVEN","GLAND","GLASS","GLOBE","GLORY","GLOSS","GLOVE","GLUED","GOING","GRACE","GRADE","GRAIN","GRAND","GRANT","GRAPE","GRAPH","GRASP",
+                   "HABIT","HANDY","HAPPY","HARSH","HATED","HAVEN","HEARD","HEART","HEAVY","HEDGE","HELLO","HENCE","HIRED","HOBBY","HOLLY","HONEY","HONOR","HOPED","HORSE","HOTEL","HOUSE","HOVER",
+                   "IDEAL","IDIOT","IMAGE","IMPLY","INBOX","INCUR","INDEX","INDIE","INNER","INPUT","INTRO","ISSUE",
+                   "JELLY","JEWEL","JOINT","JUDGE","JUICE","JUICY",
+                   "KNIFE","KNOCK","KNOWN",
+                   "LABEL","LABOR","LARGE","LASER","LATER","LAUGH","LAYER","LEARN","LEASE","LEAST","LEAVE","LEGAL","LEMON","LEVEL","LEVER","LIGHT","LIKED","LIMIT","LINED","LINEN","LINER","LIVED",
+                   "MACRO","MAGIC","MAJOR","MAKER","MAPLE","MARCH","MARRY","MATCH","MATTE","MAYBE","MAYOR","MEANT","MEDAL","MEDIA","MELEE","MERCY","MERGE","MERIT","MERRY","MESSY","METAL","METER",
+                   "NAKED","NAMED","NASAL","NASTY","NAVAL","NERVE","NEVER","NEWER","NEWLY","NEXUS","NICER","NICHE","NIGHT","NINJA","NINTH","NOBLE","NOISE","NOISY","NORTH","NOTCH","NOTED","NOVEL",
+                   "OASIS","OCCUR","OCEAN","OFFER","OFTEN","OLDER","OLIVE","OMEGA","ONION","ONSET","OPERA","OPTED","OPTIC","ORBIT","ORDER","ORGAN","OTHER","OUGHT","OUNCE","OUTER","OWNED","OWNER",
+                   "PAINT","PANEL","PANIC","PAPER","PARTY","PASTA","PASTE","PATCH","PATIO","PAUSE","PEACE","PEACH","PEARL","PEDAL","PENNY","PETTY","PHASE","PHONE","PHOTO","PIANO","PIECE","PILOT",
+                   "QUEEN","QUERY","QUEST","QUEUE","QUICK","QUIET","QUILT","QUITE","QUOTE",
+                   "RADAR","RADIO","RAINY","RAISE","RALLY","RANCH","RANGE","RAPID","RATED","RATIO","RAZOR","REACH","REACT","READY","REALM","REBEL","REFER","REIGN","RELAX","RELAY","RENAL","RENEW",
+                   "SADLY","SAFER","SALAD","SALON","SANDY","SATIN","SAUCE","SAVED","SCALE","SCALP","SCARE","SCARF","SCARY","SCENE","SCENT","SCOOP","SCOPE","SCORE","SCOUT","SCRAP","SCREW","SENSE",
+                   "TABLE","TAKEN","TASTE","TASTY","TEACH","TEETH","TEMPO","TENTH","THANK","THEFT","THEIR","THEME","THERE","THESE","THICK","THIEF","THIGH","THING","THINK","THIRD","THOSE","THREE",
+                   "ULTRA","UNCLE","UNDER","UNION","UNITE","UNITY","UNTIL","UPPER","UPSET","URBAN","URGED","URINE","USAGE","USING","USUAL",
+                   "VAGUE","VALID","VALUE","VALVE","VAPOR","VAULT","VEGAN","VENUE","VERSE","VIDEO","VILLA","VINYL","VIRAL","VIRUS","VISIT","VITAL","VIVID","VOCAL","VODKA","VOICE","VOTED","VOTER",
+                   "WAGON","WAIST","WASTE","WATCH","WATER","WEIGH","WEIRD","WELSH","WHALE","WHEAT","WHEEL","WHERE","WHICH","WHILE","WHITE","WHOLE","WHOSE","WIDER","WIDOW","WIDTH","WIPED","WIRED",
+                   "YACHT","YEAST","YIELD","YOUNG","YOUTH","YUMMY",
+    ];
+
+    // ======== NEW: COLORS FOR EACH WORD (ROW) ========
+    const wordColors = ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#9b59b6"]; // 5 distinct colors
 
     function pickRandomWords(wordList, count) {
       const shuffled = [...wordList].sort(() => Math.random() - 0.5);
@@ -174,6 +176,9 @@
     let originalGrid = selectedWords.map(w => w.split(""));
     let grid = JSON.parse(JSON.stringify(originalGrid));
     let moves = 0;
+
+    // ======== NEW: COLOR GRID FOR EACH TILE ========
+    let colorGrid = Array.from({length: 5}, (_, i) => Array(5).fill(wordColors[i])); // 5x5 grid
 
     const game = document.getElementById("game");
     const movesEl = document.getElementById("moves");
@@ -188,9 +193,11 @@
           } else if (row === 6 && col >= 1 && col <= 5) {
             addButton("↓", () => animateCol(col - 1, "down"));
           } else if (col === 0 && row >= 1 && row <= 5) {
-            addButton("←", () => animateRow(row - 1, "left"));
+            // ======== COLOR LEFT ROW ARROW ========
+            addButton("←", () => animateRow(row - 1, "left"), wordColors[row - 1]);
           } else if (col === 6 && row >= 1 && row <= 5) {
-            addButton("→", () => animateRow(row - 1, "right"));
+            // ======== COLOR RIGHT ROW ARROW ========
+            addButton("→", () => animateRow(row - 1, "right"), wordColors[row - 1]);
           } else if (row >= 1 && row <= 5 && col >= 1 && col <= 5) {
             const div = document.createElement("div");
             div.className = "cell";
@@ -198,6 +205,11 @@
             div.dataset.col = col - 1;
             const char = grid[row - 1][col - 1];
             div.textContent = char;
+            // ======== COLOR TILE BASED ON COLOR GRID ========
+            div.style.backgroundColor = colorGrid[row - 1][col - 1];
+            // For contrast: set text color to black if background is yellow
+            if (colorGrid[row - 1][col - 1] === "#f1c40f") div.style.color = "#222";
+            else div.style.color = "white";
             if (char === originalGrid[row - 1][col - 1]) {
               div.classList.add("correct");
             }
@@ -211,11 +223,18 @@
       }
     }
 
-    function addButton(symbol, action) {
+    // ======== MODIFIED: ADD COLOR ARGUMENT TO BUTTONS ========
+    function addButton(symbol, action, color) {
       const btn = document.createElement("button");
       btn.className = "btn";
       btn.textContent = symbol;
       btn.onclick = action;
+      if (color) {
+        btn.style.backgroundColor = color;
+        // For contrast: set text color to black if background is yellow
+        if (color === "#f1c40f") btn.style.color = "#222";
+        else btn.style.color = "white";
+      }
       game.appendChild(btn);
     }
 
@@ -241,46 +260,61 @@
       }, 300);
     }
 
+    // ======== MODIFIED: ROTATE COLOR GRID ALONG WITH LETTERS ========
     function rotateRowRight(row) {
       const last = grid[row][4];
+      const lastColor = colorGrid[row][4];
       for (let i = 4; i > 0; i--) {
         grid[row][i] = grid[row][i - 1];
+        colorGrid[row][i] = colorGrid[row][i - 1];
       }
       grid[row][0] = last;
+      colorGrid[row][0] = lastColor;
       moves++;
     }
 
     function rotateRowLeft(row) {
       const first = grid[row][0];
+      const firstColor = colorGrid[row][0];
       for (let i = 0; i < 4; i++) {
         grid[row][i] = grid[row][i + 1];
+        colorGrid[row][i] = colorGrid[row][i + 1];
       }
       grid[row][4] = first;
+      colorGrid[row][4] = firstColor;
       moves++;
     }
 
     function rotateColDown(col) {
       const last = grid[4][col];
+      const lastColor = colorGrid[4][col];
       for (let i = 4; i > 0; i--) {
         grid[i][col] = grid[i - 1][col];
+        colorGrid[i][col] = colorGrid[i - 1][col];
       }
       grid[0][col] = last;
+      colorGrid[0][col] = lastColor;
       moves++;
     }
 
     function rotateColUp(col) {
       const first = grid[0][col];
+      const firstColor = colorGrid[0][col];
       for (let i = 0; i < 4; i++) {
         grid[i][col] = grid[i + 1][col];
+        colorGrid[i][col] = colorGrid[i + 1][col];
       }
       grid[4][col] = first;
+      colorGrid[4][col] = firstColor;
       moves++;
     }
 
+    // ======== MODIFIED: RESET COLOR GRID ON SCRAMBLE ========
     function scramble() {
       selectedWords = pickRandomWords(words, 5);
       originalGrid = selectedWords.map(w => w.split(""));
       grid = JSON.parse(JSON.stringify(originalGrid));
+      colorGrid = Array.from({length: 5}, (_, i) => Array(5).fill(wordColors[i]));
       for (let i = 0; i < 15; i++) {
         const r = Math.floor(Math.random() * 5);
         const c = Math.floor(Math.random() * 5);
@@ -298,23 +332,23 @@
     }
 
     function checkWin() {
-  const won = grid.every((row, i) => row.join("") === originalGrid[i].join(""));
-  if (won) {
-    let feedback = "";
-    if (moves < 50)
-      feedback = "You are a GENIUS!";
-    else if (moves < 100)
-      feedback = "You are a VERY SMART PERSON!";
-    else if (moves < 200)
-      feedback = "You are a SMART PERSON!";
-    else if (moves < 300)
-      feedback = "You are DEEPLY AVERAGE!";
-    else
-      feedback = "Wow you showed great commitment there!";
+      const won = grid.every((row, i) => row.join("") === originalGrid[i].join(""));
+      if (won) {
+        let feedback = "";
+        if (moves < 100)
+          feedback = "You are a GENIUS!";
+        else if (moves < 150)
+          feedback = "You are a VERY SMART PERSON!";
+        else if (moves < 200)
+          feedback = "You are a SMART PERSON!";
+        else if (moves < 300)
+          feedback = "You are DEEPLY AVERAGE!";
+        else
+          feedback = "Wow you showed great commitment there!";
 
-    setTimeout(() => alert(`🎉 You solved it in ${moves} moves!\n${feedback}`), 100);
-  }
-}
+        setTimeout(() => alert(`🎉 You solved it in ${moves} moves!\n${feedback}`), 100);
+      }
+    }
 
     window.addEventListener("DOMContentLoaded", () => {
       scramble();
