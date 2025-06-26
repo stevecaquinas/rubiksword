@@ -5,8 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RubiksWord</title>
   <style>
-    /* ... [Your CSS remains unchanged] ... */
+    body {
+      background-color: #1e1e1e;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .center-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .game-container {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      gap: 1vw;
+      max-width: 90vw;
+      max-height: 90vw;
+    }
+
+    .cell, .btn {
+      width: 12vw;
+      height: 12vw;
+      max-width: 60px;
+      max-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5vw;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: transform 0.3s;
+    }
+
+    .cell {
+      background-color: #333;
+      border: 2px solid #555;
+    }
+
+    .btn {
+      background-color: #444;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .empty {
+      background: transparent;
+    }
+
+    #moves {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+
+    #newGameBtn {
+      background-color: green;
+      margin-top: 20px;
+      padding: 1em 2em;
+      font-size: 1.5em;
+      min-width: 180px;
+    }
+
+    /* Animation classes */
+    .slide-right { animation: slideRight 0.3s; }
+    .slide-left { animation: slideLeft 0.3s; }
+    .slide-up { animation: slideUp 0.3s; }
+    .slide-down { animation: slideDown 0.3s; }
+
+    @keyframes slideRight {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(65px); }
+    }
+    @keyframes slideLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-65px); }
+    }
+    @keyframes slideDown {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(65px); }
+    }
+    @keyframes slideUp {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-65px); }
+    }
+
+    /* Media Queries for larger screens */
+    @media (min-width: 768px) {
+      .cell, .btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .game-container {
+        gap: 6px;
+        max-width: none;
+        max-height: none;
+      }
+      .cell, .btn {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+      }
+    }
   </style>
+
 </head>
 <body>
   <h1>RubiksWord!</h1>
@@ -20,9 +134,35 @@
   </div>
 
   <script>
-    const words = [/* ... your word list ... */];
+    const words = ["ABACK","ABASE","ABATE","ABBEY","ABBOT","ABETS","ABHOR","ABIDE","ABODE","ABORT","ABOUT","ABOVE","ABUSE","ABYSS","ACHED","ACING","ACORN","ACRID","ACTED","ACTOR","ACUTE","ADAGE",
+                   "BABEL","BACON","BADDY","BADGE","BADLY","BAGEL","BAGGY","BAIRN","BAIZE","BAKED","BAKER","BALDY","BALED","BALER","BALMY","BALSA","BANAL","BANDY","BANJO","BARED","BARER","BARGE",
+                   "CABAL","CABBY","CABER","CABIN","CABLE","CACHE","CACTI","CADDY","CADET","CADRE","CAGED","CAGEY","CAIRN","CAKED","CALVE","CAMEL","CAMEO","CANAL","CANDY","CANED","CANNY","CANOE",
+                   "DACHA","DADDY","DAFFY","DAILY","DAIRY","DAISY","DANCE","DANDY","DARED","DATED","DATER","DATUM","DAUNT","DAZED","DEALT","DEATH","DEBIT","DEBUG","DEBUT","DECAF","DECAL","DECAY",
+                   "EAGER","EAGLE","EARED","EARLY","EARTH","EASED","EASEL","EASER","EATEN","EATER","EBBED","EBONY","EBOOK","ECLAT","EDEMA","EDGED","EDGER","EDICT","EDIFY","EERIE","EGGED","EGRET",
+                   "FABLE","FACED","FACER","FACET","FACIA","FADED","FADER","FAERY","FAINT","FAIRY","FAITH","FAKED","FAKER","FAMED","FANCY","FARCE","FARED","FATAL","FATED","FATTY","FAULT","FAUNA",
+                   "GAMMA","GAUGE","GENRE","GHOST","GIANT","GIVEN","GLAND","GLASS","GLOBE","GLORY","GLOSS","GLOVE","GLUED","GOING","GRACE","GRADE","GRAIN","GRAND","GRANT","GRAPE","GRAPH","GRASP",
+                   "HABIT","HANDY","HAPPY","HARSH","HATED","HAVEN","HEARD","HEART","HEAVY","HEDGE","HELLO","HENCE","HIRED","HOBBY","HOLLY","HONEY","HONOR","HOPED","HORSE","HOTEL","HOUSE","HOVER",
+                   "IDEAL","IDIOT","IMAGE","IMPLY","INBOX","INCUR","INDEX","INDIE","INNER","INPUT","INTRO","ISSUE",
+                   "JELLY","JEWEL","JOINT","JUDGE","JUICE","JUICY",
+                   "KNIFE","KNOCK","KNOWN",
+                   "LABEL","LABOR","LARGE","LASER","LATER","LAUGH","LAYER","LEARN","LEASE","LEAST","LEAVE","LEGAL","LEMON","LEVEL","LEVER","LIGHT","LIKED","LIMIT","LINED","LINEN","LINER","LIVED",
+                   "MACRO","MAGIC","MAJOR","MAKER","MAPLE","MARCH","MARRY","MATCH","MATTE","MAYBE","MAYOR","MEANT","MEDAL","MEDIA","MELEE","MERCY","MERGE","MERIT","MERRY","MESSY","METAL","METER",
+                   "NAKED","NAMED","NASAL","NASTY","NAVAL","NERVE","NEVER","NEWER","NEWLY","NEXUS","NICER","NICHE","NIGHT","NINJA","NINTH","NOBLE","NOISE","NOISY","NORTH","NOTCH","NOTED","NOVEL",
+                   "OASIS","OCCUR","OCEAN","OFFER","OFTEN","OLDER","OLIVE","OMEGA","ONION","ONSET","OPERA","OPTED","OPTIC","ORBIT","ORDER","ORGAN","OTHER","OUGHT","OUNCE","OUTER","OWNED","OWNER",
+                   "PAINT","PANEL","PANIC","PAPER","PARTY","PASTA","PASTE","PATCH","PATIO","PAUSE","PEACE","PEACH","PEARL","PEDAL","PENNY","PETTY","PHASE","PHONE","PHOTO","PIANO","PIECE","PILOT",
+                   "QUEEN","QUERY","QUEST","QUEUE","QUICK","QUIET","QUILT","QUITE","QUOTE",
+                   "RADAR","RADIO","RAINY","RAISE","RALLY","RANCH","RANGE","RAPID","RATED","RATIO","RAZOR","REACH","REACT","READY","REALM","REBEL","REFER","REIGN","RELAX","RELAY","RENAL","RENEW",
+                   "SADLY","SAFER","SALAD","SALON","SANDY","SATIN","SAUCE","SAVED","SCALE","SCALP","SCARE","SCARF","SCARY","SCENE","SCENT","SCOOP","SCOPE","SCORE","SCOUT","SCRAP","SCREW","SENSE",
+                   "TABLE","TAKEN","TASTE","TASTY","TEACH","TEETH","TEMPO","TENTH","THANK","THEFT","THEIR","THEME","THERE","THESE","THICK","THIEF","THIGH","THING","THINK","THIRD","THOSE","THREE",
+                   "ULTRA","UNCLE","UNDER","UNION","UNITE","UNITY","UNTIL","UPPER","UPSET","URBAN","URGED","URINE","USAGE","USING","USUAL",
+                   "VAGUE","VALID","VALUE","VALVE","VAPOR","VAULT","VEGAN","VENUE","VERSE","VIDEO","VILLA","VINYL","VIRAL","VIRUS","VISIT","VITAL","VIVID","VOCAL","VODKA","VOICE","VOTED","VOTER",
+                   "WAGON","WAIST","WASTE","WATCH","WATER","WEIGH","WEIRD","WELSH","WHALE","WHEAT","WHEEL","WHERE","WHICH","WHILE","WHITE","WHOLE","WHOSE","WIDER","WIDOW","WIDTH","WIPED","WIRED",
+                   "YACHT","YEAST","YIELD","YOUNG","YOUTH","YUMMY",
+    ];
 
-    const wordColors = ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#9b59b6"];
+    // COLORS FOR EACH WORD (ROW)
+    const wordColors = ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#9b59b6"]; // 5 distinct colors
+
     function pickRandomWords(wordList, count) {
       const shuffled = [...wordList].sort(() => Math.random() - 0.5);
       return shuffled.slice(0, count);
@@ -33,8 +173,10 @@
     let grid = JSON.parse(JSON.stringify(originalGrid));
     let moves = 0;
 
+    // Track original row for each tile (color origin)
     let originRows = Array.from({length: 5}, (_, r) => Array(5).fill(r));
 
+    // SCRAMBLE ROTATIONS (do NOT increment moves)
     function rotateRowRightScramble(row) {
       const last = grid[row][4];
       const lastOrigin = originRows[row][4];
@@ -102,6 +244,7 @@
       update();
     }
 
+    // USER ROTATIONS (always increment moves)
     function rotateRowRight(row) {
       const last = grid[row][4];
       const lastOrigin = originRows[row][4];
@@ -150,6 +293,7 @@
       moves++;
     }
 
+    // ANIMATION WRAPPERS
     function animateRow(row, direction) {
       const cells = document.querySelectorAll(`.cell[data-row='${row}']`);
       cells.forEach(cell => {
@@ -179,6 +323,7 @@
       }, 300);
     }
 
+    // CREATE GRID (use originRows to color tiles)
     function createGrid() {
       game.innerHTML = "";
       for (let row = 0; row < 7; row++) {
@@ -198,6 +343,7 @@
             div.dataset.col = col - 1;
             const char = grid[row - 1][col - 1];
             div.textContent = char;
+            // Color from the original row of the tile
             const colorIdx = originRows[row - 1][col - 1];
             const bgColor = wordColors[colorIdx];
             div.style.backgroundColor = bgColor;
@@ -213,6 +359,7 @@
       }
     }
 
+    // ADD COLOR ARGUMENT TO BUTTONS
     function addButton(symbol, action, color) {
       const btn = document.createElement("button");
       btn.className = "btn";
@@ -236,7 +383,7 @@
       // Win if every row forms a valid word (columns don't matter)
       let allRowsAreWords = true;
       for (let i = 0; i < 5; i++) {
-        const rowWord = grid[i].join("").toUpperCase();
+        const rowWord = grid[i].join("");
         if (!words.includes(rowWord)) {
           allRowsAreWords = false;
           break;
@@ -259,17 +406,11 @@
       }
     }
 
-    // --- MOVES ELEMENT INITIALIZATION & EVENT BINDINGS ---
-    let movesEl;
-    let game, newGameBtn;
-
     window.addEventListener("DOMContentLoaded", () => {
-      game = document.getElementById("game");
-      newGameBtn = document.getElementById("newGameBtn");
-      movesEl = document.getElementById("moves");
-      newGameBtn.onclick = scramble;
       scramble();
     });
+
+    newGameBtn.onclick = scramble;
   </script>
 </body>
 </html>
