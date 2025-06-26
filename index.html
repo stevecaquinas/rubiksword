@@ -175,7 +175,7 @@
 
     // Track original row for each tile (color origin)
     let originRows = Array.from({length: 5}, (_, r) => Array(5).fill(r));
-
+    let movesEl;
     // SCRAMBLE ROTATIONS (do NOT increment moves)
     function rotateRowRightScramble(row) {
       const last = grid[row][4];
@@ -407,7 +407,9 @@
     }
 
     window.addEventListener("DOMContentLoaded", () => {
-      scramble();
+  movesEl = document.getElementById("moves");
+  scramble();
+});
     });
 
     newGameBtn.onclick = scramble;
