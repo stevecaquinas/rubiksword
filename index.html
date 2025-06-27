@@ -13,14 +13,12 @@
       padding: 20px;
       margin: 0;
     }
-
     .center-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
     }
-
     .game-container {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -29,7 +27,6 @@
       max-width: 90vw;
       max-height: 90vw;
     }
-
     .cell, .btn {
       width: 12vw;
       height: 12vw;
@@ -43,12 +40,10 @@
       border-radius: 6px;
       transition: transform 0.3s;
     }
-
     .cell {
       background-color: #333;
       border: 2px solid #555;
     }
-
     .btn {
       background-color: #444;
       color: white;
@@ -57,16 +52,13 @@
       font-weight: bold;
       transition: background 0.2s;
     }
-
     .empty {
       background: transparent;
     }
-
     #moves {
       margin-top: 20px;
       font-size: 1.2em;
     }
-
     #newGameBtn {
       background-color: green;
       margin-top: 20px;
@@ -74,13 +66,11 @@
       font-size: 1.5em;
       min-width: 180px;
     }
-
     /* Animation classes */
     .slide-right { animation: slideRight 0.3s; }
     .slide-left { animation: slideLeft 0.3s; }
     .slide-up { animation: slideUp 0.3s; }
     .slide-down { animation: slideDown 0.3s; }
-
     @keyframes slideRight {
       0% { transform: translateX(0); }
       100% { transform: translateX(65px); }
@@ -97,8 +87,6 @@
       0% { transform: translateY(0); }
       100% { transform: translateY(-65px); }
     }
-
-    /* Media Queries for larger screens */
     @media (min-width: 768px) {
       .cell, .btn {
         width: 50px;
@@ -106,7 +94,6 @@
         font-size: 20px;
       }
     }
-
     @media (min-width: 1024px) {
       .game-container {
         gap: 6px;
@@ -120,7 +107,6 @@
       }
     }
   </style>
-
 </head>
 <body>
   <h1>RubiksWord!</h1>
@@ -132,9 +118,9 @@
     <p id="moves">Moves: 0</p>
     <button class="btn" id="newGameBtn">New Game</button>
   </div>
-
   <script>
-    const words = ["ABACK","ABASE","ABATE","ABIDE","ABODE","ABORT","ABOUT","ABUSE","ABUZZ","ACHOO","ACTOR","ACUTE","ADAPT","ADDED","ADMIN","ADMIT","ADOBE","ADOPT","ADORN","ADULT","AFFIX","AFOOT","AFOUL","AFTER","AGAIN","AGENT","AGING","AGLOW","AGONY","AGREE","AHEAD","AHOLD","AIDED","AIMED","AIRED","AISLE","ALARM","ALERT","ALIAS","ALIEN","ALIKE","ALLAY","ALLOT","ALLOY","ALOFT","ALONE","ALOOF","ALOUD","ALPHA","AMAZE","AMBER","AMEND","AMINO","AMISS","AMONG","AMOUR","AMUSE","ANGEL","ANGER","ANGLE","ANGRY","ANIME","ANKLE","ANNUL","ANVIL","APART","APNEA","APPLE","APPLY","APRON","ARENA","ARMED","ARMOR","AROSE","ARRAY","ARSON","ARTSY","ASIDE","ASKED","ASKEW","ASSET","ATONE","AUDIO","AUDIT","AUNTY","AVAIL","AVERT","AVOID","AWAIT","AWAKE","AWARD","AWARE","AWASH","AWFUL","AWOKE",
+    // Sample small word list for demo. Replace/add your full 5-letter word list here!
+        const words = ["ABACK","ABASE","ABATE","ABIDE","ABODE","ABORT","ABOUT","ABUSE","ABUZZ","ACHOO","ACTOR","ACUTE","ADAPT","ADDED","ADMIN","ADMIT","ADOBE","ADOPT","ADORN","ADULT","AFFIX","AFOOT","AFOUL","AFTER","AGAIN","AGENT","AGING","AGLOW","AGONY","AGREE","AHEAD","AHOLD","AIDED","AIMED","AIRED","AISLE","ALARM","ALERT","ALIAS","ALIEN","ALIKE","ALLAY","ALLOT","ALLOY","ALOFT","ALONE","ALOOF","ALOUD","ALPHA","AMAZE","AMBER","AMEND","AMINO","AMISS","AMONG","AMOUR","AMUSE","ANGEL","ANGER","ANGLE","ANGRY","ANIME","ANKLE","ANNUL","ANVIL","APART","APNEA","APPLE","APPLY","APRON","ARENA","ARMED","ARMOR","AROSE","ARRAY","ARSON","ARTSY","ASIDE","ASKED","ASKEW","ASSET","ATONE","AUDIO","AUDIT","AUNTY","AVAIL","AVERT","AVOID","AWAIT","AWAKE","AWARD","AWARE","AWASH","AWFUL","AWOKE",
                    "BABEL","BACON","BADDY","BADGE","BADLY","BAGEL","BAGGY","BAKED","BAKER","BALER","BALKY","BALMY","BANDY","BARED","BARMY","BARON","BASED","BASIC","BASIL","BASIN","BATCH","BATON","BATTY","BEACH","BEADY","BEAKY","BEAMY","BEARD","BEAST","BEBOP","BEECH","BEGAN","BEGIN","BEGOT","BEIGE","BELCH","BELLE","BELLY","BELOW","BENCH","BENDY","BERTH","BESET","BIBLE","BICEP","BIDET","BIKED","BIKER","BINGE","BINGO","BIPOD","BIRCH","BIRTH","BISON","BLACK","BLADE","BLAME","BLANK","BLAZE","BLEAK","BLEED","BLEEP","BLEND","BLESS","BLEST","BLIMP","BLIND","BLING","BLINK","BLISS","BLOAT","BLOCK","BLOND","BLOOD","BLOOM","BLOWN","BLOWY","BLUFF","BLUNT","BOARD","BOAST","BOGUS","BONED","BOOST","BOOTH","BOOZE","BORED","BORNE","BOUND","BOWEL","BOXED","BOXER","BRACE","BRAID","BRAIL","BRAIN","BRAKE","BRAND","BRASS","BRAWL","BREAD","BREED","BRIBE","BRIDGE","BRING","BROAD","BROKE","BROWN","BRUSH","BRUTE","BUDGE","BUILT","BULLY","BUMPY","BUNCH","BUNNY","BURNT","BUSHY","BUYER",
                    "CABIN","CABLE","CACHE","CADDY","CADET","CAKED","CALVE","CAMEL","CAMEO","CANAL","CANDY","CANOE","CANON","CARGO","CAROL","CARRY","CARVE","CASED","CATCH","CAUSE","CAVED","CEASE","CEDAR","CELLO","CHAIN","CHAIR","CHALK","CHAMP","CHART","CHASE","CHEAP","CHEAT","CHECK","CHEEK","CHEER","CHESS","CHEST","CHEWY","CHICK","CHIEF","CHILD","CHIME","CHIRP","CHIVE","CHOIR","CHOKE","CHOMP","CHORE","CHUCK","CHURN","CHUTE","CIDER","CIGAR","CLAIM","CLASP","CLASS","CLEAN","CLEAT","CLIFF","CLIMB","CLOAK","CLONE","CLOSE","CLOTH","CLOUD","CLOUT","CLOWN","COAST","CODED","COLOR","COMBO","COMFY","CONDO","CORAL","CORNY","COUCH","COUGH","COULD","COUNT","COVER","CRACK","CRAFT","CRANE","CRAWL","CRAZE","CRAZY","CREAM","CRIED","CRIME","CRISP","CROAK","CROWD","CROWN","CRUDE","CRUMB","CUPID","CURED","CURLY","CURRY","CURVE","CURVY","CUTER",
                    "DADDY","DAILY","DAIRY","DAISY","DANCE","DANDY","DATED","DEALT","DEATH","DEBUT","DECAF","DECAY","DECOR","DECOY","DEITY","DELAY","DELTA","DELVE","DEMON","DENIM","DENSE","DEPTH","DERBY","DETER","DETOX","DIARY","DICED","DINGY","DIRTY","DITCH","DITTO","DITTY","DODGE","DOGGY","DOING","DONOR","DOPED","DOTED","DOTTY","DOUGH","DOWRY","DOZER","DRAFT","DRAIN","DRAKE","DRAMA","DRANK","DRAPE","DRAWL","DRAWN","DREAD","DREAM","DRESS","DRIED","DRIER","DRILL","DRINK","DRIVE","DROID","DRONE","DROOL","DROVE","DROWN","DRUID","DRUNK","DRYER","DUNCE","DUPED","DUSTY","DUVET","DWARF","DWEEB","DWELL","DYING",
@@ -162,9 +148,10 @@
                    "ZEBRA","ZESTY","ZILCH","ZINGY","ZIPPY"
 
     ];
+    ];
 
-    // COLORS FOR EACH WORD (ROW)
-    const wordColors = ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#9b59b6"]; // 5 distinct colors
+    const wordColors = ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#9b59b6"];
+    let isLocked = false;
 
     function pickRandomWords(wordList, count) {
       const shuffled = [...wordList].sort(() => Math.random() - 0.5);
@@ -175,11 +162,10 @@
     let originalGrid = selectedWords.map(w => w.split(""));
     let grid = JSON.parse(JSON.stringify(originalGrid));
     let moves = 0;
-
-    // Track original row for each tile (color origin)
     let originRows = Array.from({length: 5}, (_, r) => Array(5).fill(r));
     let movesEl;
-    // SCRAMBLE ROTATIONS (do NOT increment moves)
+    const game = document.getElementById("game");
+
     function rotateRowRightScramble(row) {
       const last = grid[row][4];
       const lastOrigin = originRows[row][4];
@@ -225,6 +211,7 @@
     }
 
     function scramble() {
+      isLocked = false;
       selectedWords = pickRandomWords(words, 5);
       originalGrid = selectedWords.map(w => w.split(""));
       grid = JSON.parse(JSON.stringify(originalGrid));
@@ -296,8 +283,9 @@
       moves++;
     }
 
-    // ANIMATION WRAPPERS
+    // ANIMATION WRAPPERS (now check isLocked)
     function animateRow(row, direction) {
+      if (isLocked) return;
       const cells = document.querySelectorAll(`.cell[data-row='${row}']`);
       cells.forEach(cell => {
         cell.classList.add(direction === "right" ? "slide-right" : "slide-left");
@@ -312,6 +300,7 @@
       }, 300);
     }
     function animateCol(col, direction) {
+      if (isLocked) return;
       const cells = document.querySelectorAll(`.cell[data-col='${col}']`);
       cells.forEach(cell => {
         cell.classList.add(direction === "down" ? "slide-down" : "slide-up");
@@ -393,6 +382,7 @@
         }
       }
       if (allRowsAreWords) {
+        isLocked = true;
         let feedback = "";
         if (moves < 100)
           feedback = "You are a GENIUS!";
@@ -404,18 +394,14 @@
           feedback = "You are DEEPLY AVERAGE!";
         else
           feedback = "Wow you showed great commitment there!";
-
         setTimeout(() => alert(`🎉 You solved it in ${moves} moves!\n${feedback}`), 100);
       }
     }
 
     window.addEventListener("DOMContentLoaded", () => {
-    const game = document.getElementById("game");
-    movesEl = document.getElementById("moves");
-    scramble();
-});
-  
-
+      movesEl = document.getElementById("moves");
+      scramble();
+    });
     newGameBtn.onclick = scramble;
   </script>
 </body>
